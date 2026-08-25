@@ -43,9 +43,6 @@ export function CoursePage() {
               <div className="num">{i + 1}</div>
               <div>
                 <strong>{l.title}</strong>
-                <div className="muted">
-                  {1 + l.problems.length} заданий · первое — с полным разбором
-                </div>
               </div>
               <div>
                 {rec ? (

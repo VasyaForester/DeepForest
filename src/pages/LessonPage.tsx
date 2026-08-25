@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { MathText } from "../components/MathText";
 import { useLessons } from "../data/lessons";
@@ -18,12 +18,21 @@ function isCorrect(p: Problem, value: string): boolean {
 
 export function LessonPage() {
   const { lessonId } = useParams();
+  return <LessonView key={lessonId} />;
+}
+
+function LessonView() {
+  const { lessonId } = useParams();
   const lessons = useLessons();
   const { state, saveRecord } = useStore();
   const lesson = lessons.find((l) => l.id === lessonId);
 
   const [values, setValues] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [lessonId]);
 
   const existing = lesson ? state.records[lesson.id] : undefined;
 
@@ -114,9 +123,10 @@ export function LessonPage() {
       <h2>Задания для оценки</h2>
       {lesson.problems.map((p, i) => (
         <ProblemCard
-          key={p.id}
+          key={`${lesson.id}-${p.id}`}
           n={i + 2}
           problem={p}
+          formName={`${lesson.id}-${p.id}`}
           value={values[p.id] ?? ""}
           onChange={(v) => setVal(p.id, v)}
           show={submitted}
@@ -180,12 +190,14 @@ export function LessonPage() {
 function ProblemCard({
   n,
   problem,
+  formName,
   value,
   onChange,
   show,
 }: {
   n: number;
   problem: Problem;
+  formName: string;
   value: string;
   onChange: (v: string) => void;
   show: boolean;
@@ -212,7 +224,7 @@ function ProblemCard({
               <label key={idx} className={cls}>
                 <input
                   type="radio"
-                  name={problem.id}
+                  name={formName}
                   checked={value === String(idx)}
                   onChange={() => onChange(String(idx))}
                 />
