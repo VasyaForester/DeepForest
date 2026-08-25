@@ -15,7 +15,6 @@ export function Layout() {
           <Crest />
           <div className="brand-name">
             <strong>Deep Forest Academy</strong>
-            <span>est. 2026</span>
           </div>
         </NavLink>
         <nav className="nav">
@@ -32,7 +31,7 @@ export function Layout() {
         <Outlet />
       </main>
       <footer className="footer">
-        Deep Forest Academy · герб: книга, ель, DFA est. 2026 · ректор Vasya Forester
+        Deep Forest Academy · ректор Vasya Forester
       </footer>
     </div>
   );

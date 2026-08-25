@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { courses, PROGRAM } from "../data/curriculum";
+import { courses, isCoreCourse, PROGRAM } from "../data/curriculum";
 import { useLessons } from "../data/lessons";
 import {
   currentGpa,
@@ -10,6 +10,7 @@ import {
 } from "../lib/progress";
 import { formatGpa, letterFromGrade } from "../lib/grading";
 import { useStore } from "../state";
+import type { Course } from "../types";
 
 export function ProgramMathPage() {
   const { state } = useStore();
@@ -17,17 +18,54 @@ export function ProgramMathPage() {
   const gpa = currentGpa(state.records);
   const schoolDone = isSchoolComplete(lessons, state.records);
   const school = courses.filter((c) => c.phase === "school");
-  const uni = courses.filter((c) => c.phase === "university");
+  const uniCore = courses.filter((c) => c.phase === "university" && isCoreCourse(c.id));
+  const uniAdv = courses.filter((c) => c.phase === "university" && !isCoreCourse(c.id));
+
+  const renderCourse = (c: Course, kind: "school" | "core" | "advanced") => {
+    const list = lessonsOf(lessons, c.id);
+    const unlocked = isCourseUnlocked(c, lessons, state.records);
+    const complete = isCourseComplete(c.id, lessons, state.records);
+    const done = list.filter((l) => state.records[l.id]).length;
+    return (
+      <Link
+        key={c.id}
+        to={unlocked ? `/course/${c.id}` : "#"}
+        className="card"
+        style={{ color: "inherit", opacity: unlocked ? 1 : 0.55, pointerEvents: unlocked ? "auto" : "none" }}
+      >
+        <span className={`pill ${complete ? "ok" : unlocked ? "" : "lock"}`}>
+          {complete ? "Закрыт" : unlocked ? "Открыт" : kind === "school" ? "Закрыт до предыдущего курса" : "Ожидает пререквизиты"}
+        </span>
+        {kind !== "school" && (
+          <span className={`pill ${kind === "core" ? "core" : "advanced"}`} style={{ marginLeft: 6 }}>
+            {kind === "core" ? "Базовый курс" : "Углубленный курс"}
+          </span>
+        )}
+        <h3>{c.title}</h3>
+        {kind === "school" ? (
+          <p className="muted">{c.description}</p>
+        ) : (
+          <>
+            <p className="muted">{c.subtitle}</p>
+            <p className="muted">{c.description}</p>
+          </>
+        )}
+        <p>
+          {done}/{list.length} занятий
+        </p>
+      </Link>
+    );
+  };
 
   return (
     <div>
       <p className="pill">Программа</p>
       <h1>{PROGRAM.title}</h1>
       <p className="muted">
-        {lessons.length} занятий. Школьный цикл открывается по курсам. Высшая математика — после
-        полного закрытия школы; линал, матан, тервер, дискретная математика и теория чисел идут
-        параллельно. Статистика, диффуры, ТФКП, топология, численные методы и оптимизация
-        открываются по пререквизитам.
+        {lessons.length} занятий. Основной диплом — за школу и базовый курс: анализ I, линейная
+        алгебра, алгебра, аналитическая геометрия и дискретная математика. Анализ II–IV, топология,
+        теория чисел и остальные предметы углубленного курса для диплома не обязательны; если
+        закрыть всю программу, Академия выдаёт диплом лауреата.
       </p>
       {gpa !== null && (
         <p>
@@ -36,64 +74,20 @@ export function ProgramMathPage() {
       )}
 
       <h2>Школьная программа</h2>
-      <div className="grid">
-        {school.map((c) => {
-          const list = lessonsOf(lessons, c.id);
-          const unlocked = isCourseUnlocked(c, lessons, state.records);
-          const complete = isCourseComplete(c.id, lessons, state.records);
-          const done = list.filter((l) => state.records[l.id]).length;
-          return (
-            <Link
-              key={c.id}
-              to={unlocked ? `/course/${c.id}` : "#"}
-              className="card"
-              style={{ color: "inherit", opacity: unlocked ? 1 : 0.55, pointerEvents: unlocked ? "auto" : "none" }}
-            >
-              <span className={`pill ${complete ? "ok" : unlocked ? "" : "lock"}`}>
-                {complete ? "Закрыт" : unlocked ? "Открыт" : "Закрыт до предыдущего курса"}
-              </span>
-              <h3>
-                {c.title}
-              </h3>
-              <p className="muted">{c.description}</p>
-              <p>
-                {done}/{list.length} занятий
-              </p>
-            </Link>
-          );
-        })}
-      </div>
+      <div className="grid">{school.map((c) => renderCourse(c, "school"))}</div>
 
-      <h2>Высшая математика</h2>
+      <h2>Базовый курс</h2>
       {!schoolDone && (
         <p className="muted">Откроется, когда будут сданы все школьные занятия.</p>
       )}
-      <div className="grid">
-        {uni.map((c) => {
-          const list = lessonsOf(lessons, c.id);
-          const unlocked = isCourseUnlocked(c, lessons, state.records);
-          const complete = isCourseComplete(c.id, lessons, state.records);
-          const done = list.filter((l) => state.records[l.id]).length;
-          return (
-            <Link
-              key={c.id}
-              to={unlocked ? `/course/${c.id}` : "#"}
-              className="card"
-              style={{ color: "inherit", opacity: unlocked ? 1 : 0.55, pointerEvents: unlocked ? "auto" : "none" }}
-            >
-              <span className={`pill ${complete ? "ok" : unlocked ? "" : "lock"}`}>
-                {complete ? "Закрыт" : unlocked ? "Открыт" : "Ожидает пререквизиты"}
-              </span>
-              <h3>{c.title}</h3>
-              <p className="muted">{c.subtitle}</p>
-              <p className="muted">{c.description}</p>
-              <p>
-                {done}/{list.length} занятий
-              </p>
-            </Link>
-          );
-        })}
-      </div>
+      <div className="grid">{uniCore.map((c) => renderCourse(c, "core"))}</div>
+
+      <h2>Углубленный курс</h2>
+      <p className="muted">
+        Не обязательно для основного диплома. Полный курс, включая анализ II–IV и топологию, даёт
+        диплом лауреата.
+      </p>
+      <div className="grid">{uniAdv.map((c) => renderCourse(c, "advanced"))}</div>
     </div>
   );
 }

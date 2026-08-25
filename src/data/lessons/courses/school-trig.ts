@@ -3,11 +3,11 @@ import type { Lesson } from "../../../types";
 
 export const lessons: Lesson[] = [
   makeLesson("school-trig", 0, "Тригонометрический круг", {
-    theory: String.raw`Единичная окружность (тригонометрический круг) — окружность радиуса $1$ с центром в начале координат. Точке, соответствующей углу $\alpha$ (отложенному от луча $Ox$ против часовой стрелки), приписывают координаты $(\cos\alpha;\,\sin\alpha)$. Таким образом, косинус — абсцисса, синус — ордината.
+    theory: String.raw`Единичная окружность (тригонометрический круг) — окружность радиуса $1$ с центром в начале координат. Угол $\alpha$ откладывают от луча $Ox$ против часовой стрелки; соответствующей точке приписывают координаты $(\cos\alpha;\,\sin\alpha)$. Таким образом, косинус — абсцисса, синус — ордината.
 
 Радианная мера: развёрнутый угол равен $\pi$, полный оборот — $2\pi$. Стандартные углы: $0$, $\dfrac{\pi}{6}$, $\dfrac{\pi}{4}$, $\dfrac{\pi}{3}$, $\dfrac{\pi}{2}$, $\pi$, $\dfrac{3\pi}{2}$, $2\pi$.
 
-Знаки функций по четвертям: в I все положительны; во II положителен синус; в III — тангенс (и котангенс); в IV — косинус. Тангенс $\tan\alpha=\dfrac{\sin\alpha}{\cos\alpha}$ не определён, когда $\cos\alpha=0$, то есть при $\alpha=\dfrac{\pi}{2}+\pi k$, $k\in\mathbb{Z}$.`,
+Знаки функций по четвертям: в I все положительны; во II положителен синус; в III — тангенс (и котангенс); в IV — косинус. Тангенс $\tan\alpha=\dfrac{\sin\alpha}{\cos\alpha}$ не определён, когда $\cos\alpha=0$, то есть при $\alpha=\dfrac{\pi}{2}+\pi k$, где $k$ — любое целое число.`,
     examples: [
       {
         title: "Координаты точки на круге",
@@ -115,7 +115,7 @@ export const lessons: Lesson[] = [
   }),
 
   makeLesson("school-trig", 1, "Основное тождество и табличные значения", {
-    theory: String.raw`Основное тригонометрическое тождество: $\sin^{2}\alpha+\cos^{2}\alpha=1$ для всех $\alpha$, при которых обе функции определены (то есть для всех действительных $\alpha$). Следствия: $1+\tan^{2}\alpha=\dfrac{1}{\cos^{2}\alpha}$ и $1+\cot^{2}\alpha=\dfrac{1}{\sin^{2}\alpha}$ там, где знаменатели не равны нулю.
+    theory: String.raw`Основное тригонометрическое тождество: $\sin^{2}\alpha+\cos^{2}\alpha=1$ для любого действительного угла $\alpha$. Следствия (там, где знаменатели не равны нулю): $1+\tan^{2}\alpha=\dfrac{1}{\cos^{2}\alpha}$ и $1+\cot^{2}\alpha=\dfrac{1}{\sin^{2}\alpha}$.
 
 Табличные значения:
 $\sin 0^{\circ}=0$, $\cos 0^{\circ}=1$;
@@ -232,14 +232,14 @@ $\sin 90^{\circ}=1$, $\cos 90^{\circ}=0$.
   }),
 
   makeLesson("school-trig", 2, "Формулы сложения и двойного угла", {
-    theory: String.raw`Формулы сложения:
+    theory: String.raw`Формулы сложения выражают синус, косинус и тангенс суммы или разности через функции самих углов $\alpha$ и $\beta$:
 $\sin(\alpha+\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta$,
 $\sin(\alpha-\beta)=\sin\alpha\cos\beta-\cos\alpha\sin\beta$,
 $\cos(\alpha+\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta$,
 $\cos(\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta$,
-$\tan(\alpha\pm\beta)=\dfrac{\tan\alpha\pm\tan\beta}{1\mp\tan\alpha\tan\beta}$ (где выражения определены).
+$\tan(\alpha\pm\beta)=\dfrac{\tan\alpha\pm\tan\beta}{1\mp\tan\alpha\tan\beta}$ (там, где выражения определены).
 
-Формулы двойного угла получают подстановкой $\beta=\alpha$:
+Формулы двойного угла получают, полагая $\beta=\alpha$:
 $\sin 2\alpha=2\sin\alpha\cos\alpha$,
 $\cos 2\alpha=\cos^{2}\alpha-\sin^{2}\alpha=2\cos^{2}\alpha-1=1-2\sin^{2}\alpha$,
 $\tan 2\alpha=\dfrac{2\tan\alpha}{1-\tan^{2}\alpha}$.`,
@@ -354,13 +354,9 @@ $\tan 2\alpha=\dfrac{2\tan\alpha}{1-\tan^{2}\alpha}$.`,
   }),
 
   makeLesson("school-trig", 3, "Тригонометрические уравнения", {
-    theory: String.raw`Простейшие уравнения решают через общие семейства решений ($k\in\mathbb{Z}$).
+    theory: String.raw`Простейшие тригонометрические уравнения решают, записывая общее семейство корней. Целое число $k$ пробегает все целые значения: $k\in\mathbb{Z}$.
 
-$\sin x=a$ при $|a|\leq 1$: $x=(-1)^{k}\arcsin a+\pi k$. Эквивалентная запись: $x=\arcsin a+2\pi k$ или $x=\pi-\arcsin a+2\pi k$.
-
-$\cos x=a$ при $|a|\leq 1$: $x=\pm\arccos a+2\pi k$.
-
-$\tan x=a$ (для любого $a$): $x=\arctan a+\pi k$.
+Уравнение $\sin x=a$ при $|a|\leq 1$ имеет решения $x=(-1)^{k}\arcsin a+\pi k$. Эквивалентная запись: $x=\arcsin a+2\pi k$ или $x=\pi-\arcsin a+2\pi k$. Уравнение $\cos x=a$ при $|a|\leq 1$: $x=\pm\arccos a+2\pi k$. Уравнение $\tan x=a$ (для любого $a$): $x=\arctan a+\pi k$.
 
 Частные случаи: $\sin x=0$ даёт $x=\pi k$; $\sin x=1$ даёт $x=\dfrac{\pi}{2}+2\pi k$; $\cos x=0$ даёт $x=\dfrac{\pi}{2}+\pi k$; $\cos x=-1$ даёт $x=\pi+2\pi k$. Если $|a|>1$, уравнений $\sin x=a$ и $\cos x=a$ решений нет.`,
     examples: [
@@ -475,13 +471,13 @@ $\tan x=a$ (для любого $a$): $x=\arctan a+\pi k$.
   }),
 
   makeLesson("school-trig", 4, "Обратные тригонометрические функции", {
-    theory: String.raw`Арксинус $\arcsin a$ при $a\in[-1;1]$ — единственное число $x\in\left[-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\right]$ такое, что $\sin x=a$. Арккосинус $\arccos a$ — единственное $x\in[0;\,\pi]$ с $\cos x=a$. Арктангенс $\arctan a$ определён для всех действительных $a$ и принимает значения из $\left(-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\right)$.
+    theory: String.raw`Арксинус $\arcsin a$ при $a\in[-1;1]$ — единственное число $x$ из отрезка $\left[-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\right]$ такое, что $\sin x=a$. Арккосинус $\arccos a$ — единственное $x$ из отрезка $[0;\,\pi]$ с $\cos x=a$. Арктангенс $\arctan a$ определён для всех действительных $a$ и принимает значения из интервала $\left(-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\right)$.
 
 Табличные значения: $\arcsin\dfrac{1}{2}=\dfrac{\pi}{6}$, $\arcsin\dfrac{\sqrt{2}}{2}=\dfrac{\pi}{4}$, $\arcsin 1=\dfrac{\pi}{2}$, $\arcsin 0=0$, $\arcsin(-1)=-\dfrac{\pi}{2}$;
 $\arccos\dfrac{1}{2}=\dfrac{\pi}{3}$, $\arccos 0=\dfrac{\pi}{2}$, $\arccos(-1)=\pi$, $\arccos 1=0$, $\arccos\left(-\dfrac{1}{2}\right)=\dfrac{2\pi}{3}$;
 $\arctan 1=\dfrac{\pi}{4}$, $\arctan 0=0$, $\arctan\sqrt{3}=\dfrac{\pi}{3}$.
 
-Тождества $\sin(\arcsin a)=a$ и $\cos(\arccos a)=a$ на $[-1;1]$; $\tan(\arctan a)=a$ на $\mathbb{R}$.`,
+Тождества $\sin(\arcsin a)=a$ и $\cos(\arccos a)=a$ верны на $[-1;1]$; $\tan(\arctan a)=a$ — на всей прямой.`,
     examples: [
       {
         title: "Арксинус",
@@ -599,9 +595,9 @@ $\arctan 1=\dfrac{\pi}{4}$, $\arctan 0=0$, $\arctan\sqrt{3}=\dfrac{\pi}{3}$.
   }),
 
   makeLesson("school-trig", 5, "Теоремы синусов и косинусов", {
-    theory: String.raw`Теорема синусов: в любом треугольнике $\dfrac{a}{\sin A}=\dfrac{b}{\sin B}=\dfrac{c}{\sin C}=2R$, где $a,b,c$ — стороны, $A,B,C$ — противолежащие углы, $R$ — радиус описанной окружности.
+    theory: String.raw`Теорема синусов: в любом треугольнике отношение стороны к синусу противолежащего угла одно и то же: $\dfrac{a}{\sin A}=\dfrac{b}{\sin B}=\dfrac{c}{\sin C}=2R$, где $a,b,c$ — стороны, $A,B,C$ — противолежащие им углы, $R$ — радиус описанной окружности.
 
-Теорема косинусов: $c^{2}=a^{2}+b^{2}-2ab\cos C$ (и циклические перестановки). При $C=90^{\circ}$ получается теорема Пифагора: $c^{2}=a^{2}+b^{2}$. Угол $C$ острый, если $c^{2}<a^{2}+b^{2}$, и тупой, если $c^{2}>a^{2}+b^{2}$.
+Теорема косинусов: $c^{2}=a^{2}+b^{2}-2ab\cos C$ (и циклические перестановки сторон и углов). При $C=90^{\circ}$ получается теорема Пифагора: $c^{2}=a^{2}+b^{2}$. Угол $C$ острый, если $c^{2}<a^{2}+b^{2}$, и тупой, если $c^{2}>a^{2}+b^{2}$.
 
 Площадь треугольника: $S=\dfrac{1}{2}ab\sin C$. Для прямоугольного треугольника с гипотенузой $c$ верно $R=\dfrac{c}{2}$.`,
     examples: [
@@ -711,6 +707,416 @@ $\arctan 1=\dfrac{\pi}{4}$, $\arctan 0=0$, $\arctan\sqrt{3}=\dfrac{\pi}{3}$.
         authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
         title: "Алгебра и начала анализа. 10–11 классы",
         note: "Применения тригонометрии в геометрии",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 6, "Формулы приведения", {
+    theory: String.raw`Формулы приведения выражают функции углов $\dfrac{\pi}{2}\pm\alpha$, $\pi\pm\alpha$, $\dfrac{3\pi}{2}\pm\alpha$, $2\pi\pm\alpha$ через функции самого $\alpha$. Если угол равен $\dfrac{\pi}{2}\pm\alpha$ или $\dfrac{3\pi}{2}\pm\alpha$ («нечётное число прямых»), имя меняется: синус на косинус и наоборот. Если угол равен $\pi\pm\alpha$ или $2\pi\pm\alpha$ («чётное число прямых»), имя сохраняется.
+
+Знак берут таким, какой имела исходная функция в той четверти, куда попадает угол при остром $\alpha$. Примеры: $\sin(\pi-\alpha)=\sin\alpha$, $\cos(\pi-\alpha)=-\cos\alpha$, $\sin\bigl(\dfrac{\pi}{2}-\alpha\bigr)=\cos\alpha$.
+
+Формулы сводят табличные углы к первой четверти. Они согласованы с чётностью: $\cos(-\alpha)=\cos\alpha$, $\sin(-\alpha)=-\sin\alpha$.`,
+    examples: [
+      {
+        title: "Синус смежного угла",
+        problem: String.raw`Упростите $\sin(\pi-\alpha)$.`,
+        solution: String.raw`Угол $\pi-\alpha$ при остром $\alpha$ лежит во второй четверти, синус положителен, имя не меняется: $\sin(\pi-\alpha)=\sin\alpha$.`,
+      },
+      {
+        title: "Косинус дополнительного угла",
+        problem: String.raw`Упростите $\cos\bigl(\dfrac{\pi}{2}-\alpha\bigr)$.`,
+        solution: String.raw`Нечётное число прямых — имя меняется, первая четверть — знак плюс: $\cos\bigl(\dfrac{\pi}{2}-\alpha\bigr)=\sin\alpha$.`,
+      },
+    ],
+    sample: {
+      id: "tr07-s",
+      type: "open",
+      prompt: String.raw`Вычислите $\sin\dfrac{5\pi}{6}$.`,
+      accepted: ["1/2", "0.5", "0,5"],
+      explanation: String.raw`$\sin\dfrac{5\pi}{6}=\sin\bigl(\pi-\dfrac{\pi}{6}\bigr)=\sin\dfrac{\pi}{6}=\dfrac{1}{2}$.`,
+      solution: String.raw`Запишем $\dfrac{5\pi}{6}=\pi-\dfrac{\pi}{6}$. По формуле приведения $\sin(\pi-\alpha)=\sin\alpha$, поэтому $\sin\dfrac{5\pi}{6}=\sin\dfrac{\pi}{6}=\dfrac{1}{2}$.`,
+    },
+    problems: [
+      {
+        id: "tr07-q1",
+        type: "choice",
+        prompt: String.raw`$\sin(\pi-\alpha)$ равно`,
+        options: [
+          String.raw`$-\sin\alpha$`,
+          String.raw`$\sin\alpha$`,
+          String.raw`$\cos\alpha$`,
+          String.raw`$-\cos\alpha$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Имя сохраняется, во II четверти синус положителен.`,
+      },
+      {
+        id: "tr07-q2",
+        type: "open",
+        prompt: String.raw`Вычислите $\cos\pi$.`,
+        accepted: ["-1", "-1.0"],
+        explanation: String.raw`$\cos\pi=-1$.`,
+      },
+      {
+        id: "tr07-q3",
+        type: "choice",
+        prompt: String.raw`$\cos\bigl(\dfrac{\pi}{2}-\alpha\bigr)$ равно`,
+        options: [
+          String.raw`$\cos\alpha$`,
+          String.raw`$\sin\alpha$`,
+          String.raw`$-\sin\alpha$`,
+          String.raw`$-\cos\alpha$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Нечётное число прямых: имя меняется, знак плюс.`,
+      },
+      {
+        id: "tr07-q4",
+        type: "open",
+        prompt: String.raw`Вычислите $\sin\dfrac{3\pi}{2}$.`,
+        accepted: ["-1", "-1.0"],
+        explanation: String.raw`Точка нижней полуоси, ордината $-1$.`,
+      },
+      {
+        id: "tr07-q5",
+        type: "choice",
+        prompt: String.raw`$\sin(-\alpha)$ равно`,
+        options: [
+          String.raw`$\sin\alpha$`,
+          String.raw`$-\sin\alpha$`,
+          String.raw`$\cos\alpha$`,
+          String.raw`$-\cos\alpha$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Синус — нечётная функция.`,
+      },
+      {
+        id: "tr07-q6",
+        type: "open",
+        prompt: String.raw`Вычислите $\cos\dfrac{2\pi}{3}$.`,
+        accepted: ["-1/2", "-0.5", "-0,5"],
+        explanation: String.raw`$\cos\bigl(\pi-\dfrac{\pi}{3}\bigr)=-\cos\dfrac{\pi}{3}=-\dfrac{1}{2}$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "формулы приведения",
+      },
+      {
+        authors: "Никольский С.М., Потапов М.К., Решетников Н.Н., Шевкин А.В.",
+        title: "Алгебра и начала математического анализа. 10–11 классы",
+        note: "приведение к острому углу",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 7, "Формулы суммы и произведения", {
+    theory: String.raw`Формулы суммы превращают сумму или разность синусов и косинусов в произведение:
+$\sin\alpha+\sin\beta=2\sin\dfrac{\alpha+\beta}{2}\cos\dfrac{\alpha-\beta}{2}$,
+$\sin\alpha-\sin\beta=2\cos\dfrac{\alpha+\beta}{2}\sin\dfrac{\alpha-\beta}{2}$,
+$\cos\alpha+\cos\beta=2\cos\dfrac{\alpha+\beta}{2}\cos\dfrac{\alpha-\beta}{2}$,
+$\cos\alpha-\cos\beta=-2\sin\dfrac{\alpha+\beta}{2}\sin\dfrac{\alpha-\beta}{2}$.
+
+Обратные формулы превращают произведение в сумму:
+$2\sin\alpha\cos\beta=\sin(\alpha+\beta)+\sin(\alpha-\beta)$,
+$2\cos\alpha\cos\beta=\cos(\alpha+\beta)+\cos(\alpha-\beta)$,
+$2\sin\alpha\sin\beta=\cos(\alpha-\beta)-\cos(\alpha+\beta)$.
+
+Их выводят из формул сложения, складывая или вычитая. Применяют при решении уравнений вроде $\sin x+\sin 3x=0$, при упрощении выражений и при вычислении сумм. Знак в формуле для $\cos\alpha-\cos\beta$ легко забыть: разность косинусов отрицательна, когда $|\alpha|<|\beta|$ при острых углах.`,
+    examples: [
+      {
+        title: "Сумма синусов",
+        problem: String.raw`Упростите $\sin 75^{\circ}+\sin 15^{\circ}$.`,
+        solution: String.raw`$2\sin 45^{\circ}\cos 30^{\circ}=2\cdot\dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{3}}{2}=\dfrac{\sqrt{6}}{2}$.`,
+      },
+      {
+        title: "Произведение",
+        problem: String.raw`Вычислите $2\sin\dfrac{\pi}{12}\cos\dfrac{\pi}{12}$.`,
+        solution: String.raw`Это $\sin\dfrac{\pi}{6}=\dfrac{1}{2}$ по формуле двойного угла, частному случаю произведения.`,
+      },
+    ],
+    sample: {
+      id: "tr08-s",
+      type: "open",
+      prompt: String.raw`Вычислите $\cos\dfrac{\pi}{3}+\cos\dfrac{2\pi}{3}$.`,
+      accepted: ["0", "0.0"],
+      explanation: String.raw`$\dfrac{1}{2}+\bigl(-\dfrac{1}{2}\bigr)=0$.`,
+      solution: String.raw`Табличные значения: $\cos\dfrac{\pi}{3}=\dfrac{1}{2}$, $\cos\dfrac{2\pi}{3}=-\dfrac{1}{2}$. Сумма равна $0$. По формуле суммы косинусов: $2\cos\dfrac{\pi}{2}\cos\dfrac{-\pi}{6}=0\cdot\cos\dfrac{\pi}{6}=0$.`,
+    },
+    problems: [
+      {
+        id: "tr08-q1",
+        type: "choice",
+        prompt: String.raw`$\sin\alpha+\sin\beta$ равно`,
+        options: [
+          String.raw`$2\sin\dfrac{\alpha+\beta}{2}\cos\dfrac{\alpha-\beta}{2}$`,
+          String.raw`$2\cos\dfrac{\alpha+\beta}{2}\sin\dfrac{\alpha-\beta}{2}$`,
+          String.raw`$\sin(\alpha+\beta)$`,
+          String.raw`$\sin\alpha\sin\beta$`,
+        ],
+        answerIndex: 0,
+        explanation: String.raw`Стандартная формула суммы синусов.`,
+      },
+      {
+        id: "tr08-q2",
+        type: "open",
+        prompt: String.raw`Вычислите $\sin\dfrac{\pi}{2}+\sin 0$.`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`$1+0=1$.`,
+      },
+      {
+        id: "tr08-q3",
+        type: "choice",
+        prompt: String.raw`$2\sin\alpha\cos\alpha$ равно`,
+        options: [
+          String.raw`$\sin\alpha$`,
+          String.raw`$\sin 2\alpha$`,
+          String.raw`$\cos 2\alpha$`,
+          String.raw`$2\sin\alpha$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Формула двойного угла — частный случай произведения.`,
+      },
+      {
+        id: "tr08-q4",
+        type: "open",
+        prompt: String.raw`Вычислите $\cos 0+\cos\pi$.`,
+        accepted: ["0", "0.0"],
+        explanation: String.raw`$1+(-1)=0$.`,
+      },
+      {
+        id: "tr08-q5",
+        type: "choice",
+        prompt: String.raw`$\cos\alpha-\cos\beta$ равно`,
+        options: [
+          String.raw`$2\sin\dfrac{\alpha+\beta}{2}\sin\dfrac{\alpha-\beta}{2}$`,
+          String.raw`$-2\sin\dfrac{\alpha+\beta}{2}\sin\dfrac{\alpha-\beta}{2}$`,
+          String.raw`$2\cos\dfrac{\alpha+\beta}{2}\cos\dfrac{\alpha-\beta}{2}$`,
+          String.raw`$\cos(\alpha-\beta)$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Минус перед произведением синусов.`,
+      },
+      {
+        id: "tr08-q6",
+        type: "open",
+        prompt: String.raw`Вычислите $2\sin\dfrac{\pi}{4}\cos\dfrac{\pi}{4}$.`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`$\sin\dfrac{\pi}{2}=1$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "преобразование сумм и произведений тригонометрических функций",
+      },
+      {
+        authors: "Мордкович А.Г.",
+        title: "Алгебра и начала математического анализа",
+        note: "формулы суммы и произведения",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 8, "Графики тригонометрических функций", {
+    theory: String.raw`График $y=\sin x$ называют синусоидой: период равен $2\pi$, область значений — отрезок $[-1;1]$, нули в точках $\pi k$, максимумы $1$ при $x=\dfrac{\pi}{2}+2\pi k$, минимумы $-1$ при $x=\dfrac{3\pi}{2}+2\pi k$ ($k$ — целое). График $y=\cos x$ — та же синусоида, сдвинутая на $\dfrac{\pi}{2}$ влево: $\cos x=\sin\bigl(x+\dfrac{\pi}{2}\bigr)$.
+
+Тангенс $y=\mathrm{tg}\, x$ имеет период $\pi$, вертикальные асимптоты $x=\dfrac{\pi}{2}+\pi k$, область значений — вся прямая. Котангенс имеет период $\pi$ и асимптоты $x=\pi k$.
+
+Общий вид $y=A\sin(\omega x+\varphi)$: амплитуда равна $|A|$, период $T=\dfrac{2\pi}{|\omega|}$, сдвиг фазы $-\dfrac{\varphi}{\omega}$. Растяжение по оси $Ox$ происходит при $|\omega|<1$, сжатие — при $|\omega|>1$. Точки экстремумов синуса читают с круга: ордината $\pm 1$.`,
+    examples: [
+      {
+        title: "Период",
+        problem: String.raw`Найдите период функции $y=\sin 2x$.`,
+        solution: String.raw`$T=\dfrac{2\pi}{2}=\pi$. На промежутке $[0;\pi]$ укладывается одна полная волна.`,
+      },
+      {
+        title: "Амплитуда",
+        problem: String.raw`Найдите наибольшее значение $y=3\cos x$.`,
+        solution: String.raw`Косинус не превосходит $1$, поэтому наибольшее значение равно $3$.`,
+      },
+    ],
+    sample: {
+      id: "tr09-s",
+      type: "open",
+      prompt: String.raw`Найдите период функции $y=\cos 4x$. В ответе укажите $T/\pi$.`,
+      accepted: ["1/2", "0.5", "0,5"],
+      explanation: String.raw`$T=\dfrac{2\pi}{4}=\dfrac{\pi}{2}$, $T/\pi=\dfrac{1}{2}$.`,
+      solution: String.raw`Для $y=\cos\omega x$ период $T=\dfrac{2\pi}{|\omega|}$. Здесь $\omega=4$, $T=\dfrac{\pi}{2}$. Отношение $T/\pi=\dfrac{1}{2}$.`,
+    },
+    problems: [
+      {
+        id: "tr09-q1",
+        type: "choice",
+        prompt: String.raw`Область значений $y=\sin x$ равна`,
+        options: [
+          String.raw`$(0;1)$`,
+          String.raw`$[-1;1]$`,
+          String.raw`$\mathbb{R}$`,
+          String.raw`$[0;2\pi]$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Синус принимает все значения от $-1$ до $1$.`,
+      },
+      {
+        id: "tr09-q2",
+        type: "open",
+        prompt: String.raw`Найдите наибольшее значение функции $y=5\sin x$.`,
+        accepted: ["5", "5.0"],
+        explanation: String.raw`Амплитуда $5$.`,
+      },
+      {
+        id: "tr09-q3",
+        type: "choice",
+        prompt: String.raw`Период $y=\mathrm{tg}\, x$ равен`,
+        options: [
+          String.raw`$2\pi$`,
+          String.raw`$\pi$`,
+          String.raw`$\dfrac{\pi}{2}$`,
+          String.raw`$1$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Основной период тангенса равен $\pi$.`,
+      },
+      {
+        id: "tr09-q4",
+        type: "open",
+        prompt: String.raw`Найдите период $y=\sin 3x$. В ответе укажите $T/\pi$.`,
+        accepted: ["2/3", "0.666", "0,666", "0.67", "0,67"],
+        explanation: String.raw`$T=\dfrac{2\pi}{3}$, $T/\pi=\dfrac{2}{3}$.`,
+      },
+      {
+        id: "tr09-q5",
+        type: "choice",
+        prompt: String.raw`Наименьшее значение $y=2\cos x$ равно`,
+        options: ["$-1$", "$-2$", "$0$", "$2$"],
+        answerIndex: 1,
+        explanation: String.raw`Косинус достигает $-1$, произведение равно $-2$.`,
+      },
+      {
+        id: "tr09-q6",
+        type: "open",
+        prompt: String.raw`Вычислите $\sin\dfrac{\pi}{2}$. Это ордината максимума синусоиды.`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`Максимум синуса равен $1$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "графики синуса, косинуса, тангенса",
+      },
+      {
+        authors: "Колмогоров А.Н., Абрамов А.М., Дудницын Ю.П. и др.",
+        title: "Алгебра и начала математического анализа. 10–11 классы",
+        note: "гармонические колебания, амплитуда и период",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 9, "Тригонометрические неравенства", {
+    theory: String.raw`Неравенство $\sin x>a$ при $|a|<1$ решают по единичной окружности: ординаты выше горизонтали $y=a$ заполняют открытую дугу, которую записывают через арксинус. Если $a\geq 1$, решений нет (кроме неравенства $\sin x\geq 1$ при $a=1$, которое даёт точки $\dfrac{\pi}{2}+2\pi k$). Если $a<-1$, неравенство $\sin x>a$ верно для всех $x$.
+
+Аналогично $\cos x>a$ выделяет дугу справа от вертикали $x=a$. Для тангенса используют монотонность на интервале $\bigl(-\dfrac{\pi}{2};\dfrac{\pi}{2}\bigr)$ и периодичность с периодом $\pi$: $\mathrm{tg}\, x>a$ равносильно $x>\mathrm{arctg}\, a$ на каждом интервале определения.
+
+Строгое неравенство не включает концы дуги; нестрогое включает. После нахождения решения на одном периоде его распространяют с шагом $2\pi$ (для синуса и косинуса) или $\pi$ (для тангенса). Полезно делать чертёж круга, а не заучивать готовые цепочки.`,
+    examples: [
+      {
+        title: "Синус",
+        problem: String.raw`Решите $\sin x>0$.`,
+        solution: String.raw`Ордината положительна в верхней полуокружности: $2\pi k<x<\pi+2\pi k$, $k\in\mathbb{Z}$.`,
+      },
+      {
+        title: "Косинус",
+        problem: String.raw`Решите $\cos x\geq \dfrac{1}{2}$.`,
+        solution: String.raw`На $[0;2\pi]$ это $\bigl[0;\dfrac{\pi}{3}\bigr]\cup\bigl[\dfrac{5\pi}{3};2\pi\bigr]$, затем плюс $2\pi k$.`,
+      },
+    ],
+    sample: {
+      id: "tr10-s",
+      type: "open",
+      prompt: String.raw`Сколько решений на промежутке $[0;2\pi)$ имеет неравенство $\sin x=1$? (Это крайний случай неравенства $\sin x\geq 1$.)`,
+      accepted: ["1", "1.0"],
+      explanation: String.raw`Единственная точка $x=\dfrac{\pi}{2}$.`,
+      solution: String.raw`Равенство $\sin x=1$ на периоде даёт $x=\dfrac{\pi}{2}+2\pi k$. На $[0;2\pi)$ попадает ровно одно значение $\dfrac{\pi}{2}$. Неравенство $\sin x\geq 1$ совпадает с этим равенством.`,
+    },
+    problems: [
+      {
+        id: "tr10-q1",
+        type: "choice",
+        prompt: String.raw`Неравенство $\sin x>2$`,
+        options: [
+          String.raw`верно при всех $x$`,
+          String.raw`не имеет решений`,
+          String.raw`верно при $x=\dfrac{\pi}{2}$`,
+          String.raw`верно при $x>2$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Синус не превосходит $1$.`,
+      },
+      {
+        id: "tr10-q2",
+        type: "open",
+        prompt: String.raw`Сколько корней уравнения $\sin x=0$ лежит на $[0;2\pi)$?`,
+        accepted: ["2", "2.0"],
+        explanation: String.raw`Точки $0$ и $\pi$ (значение $2\pi$ не входит).`,
+      },
+      {
+        id: "tr10-q3",
+        type: "choice",
+        prompt: String.raw`Множество решений $\cos x>1$`,
+        options: [
+          String.raw`все $x$`,
+          String.raw`пусто`,
+          String.raw`$x=0$`,
+          String.raw`$x=\pi$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Косинус не больше $1$; строгое неравенство пусто.`,
+      },
+      {
+        id: "tr10-q4",
+        type: "open",
+        prompt: String.raw`Сколько решений $\cos x=1$ на $[0;2\pi)$?`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`Только $x=0$.`,
+      },
+      {
+        id: "tr10-q5",
+        type: "choice",
+        prompt: String.raw`Неравенство $\sin x\geq -2$`,
+        options: [
+          String.raw`не имеет решений`,
+          String.raw`верно при всех действительных $x$`,
+          String.raw`верно только при $x=\dfrac{3\pi}{2}$`,
+          String.raw`верно только при $x>0$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Синус всегда не меньше $-1$, тем более не меньше $-2$.`,
+      },
+      {
+        id: "tr10-q6",
+        type: "open",
+        prompt: String.raw`Сколько решений $\sin x=-1$ на $[0;2\pi)$?`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`Точка $x=\dfrac{3\pi}{2}$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "тригонометрические неравенства",
+      },
+      {
+        authors: "Мордкович А.Г.",
+        title: "Алгебра и начала математического анализа",
+        note: "решение неравенств по тригонометрическому кругу",
       },
     ],
   }),

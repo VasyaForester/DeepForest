@@ -7,28 +7,39 @@ function renderKatex(tex: string, display: boolean): string {
       displayMode: display,
       throwOnError: false,
       strict: false,
+      output: "html",
     });
   } catch {
     return tex;
   }
 }
 
-function toHtml(input: string): string {
+function inlineHtml(input: string): string {
   const parts: string[] = [];
   const re = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g;
   let last = 0;
   let m: RegExpExecArray | null;
   while ((m = re.exec(input))) {
-    parts.push(escapeHtml(input.slice(last, m.index)).replaceAll("\n", "<br/>"));
+    parts.push(escapeHtml(input.slice(last, m.index)).replaceAll("\n", " "));
     if (m[1] !== undefined) {
-      parts.push(renderKatex(m[1], true));
+      parts.push(renderKatex(m[1].trim(), true));
     } else {
       parts.push(renderKatex(m[2], false));
     }
     last = m.index + m[0].length;
   }
-  parts.push(escapeHtml(input.slice(last)).replaceAll("\n", "<br/>"));
+  parts.push(escapeHtml(input.slice(last)).replaceAll("\n", " "));
   return parts.join("");
+}
+
+function toBlockHtml(input: string): string {
+  const paragraphs = input
+    .trim()
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  if (paragraphs.length === 0) return "";
+  return paragraphs.map((p) => `<p class="math-p">${inlineHtml(p)}</p>`).join("");
 }
 
 function escapeHtml(s: string): string {
@@ -38,7 +49,31 @@ function escapeHtml(s: string): string {
     .replaceAll(">", "&gt;");
 }
 
-export function MathText({ text, className }: { text: string; className?: string }) {
-  const html = useMemo(() => toHtml(text), [text]);
-  return <span className={className} dangerouslySetInnerHTML={{ __html: html }} />;
+export function MathText({
+  text,
+  className,
+  inline = false,
+}: {
+  text: string;
+  className?: string;
+  inline?: boolean;
+}) {
+  const html = useMemo(
+    () => (inline ? inlineHtml(text) : toBlockHtml(text)),
+    [text, inline],
+  );
+  if (inline) {
+    return (
+      <span
+        className={className ? `math-text ${className}` : "math-text"}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    );
+  }
+  return (
+    <div
+      className={className ? `math-text ${className}` : "math-text"}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 }

@@ -27,12 +27,8 @@ export function WelcomePage() {
     <section className="card hero">
       <Crest />
       <div>
-        <p className="pill">DFA est. 2026</p>
         <h1>Deep Forest Academy</h1>
-        <p className="muted">
-          Локальный учебник-тренажёр. Светлая хвойная тропа: сначала школьная программа, затем
-          высшая математика. Оценка за занятие — до 4.0 по американской шкале.
-        </p>
+        <p className="muted">Онлайн-тренажер по математике</p>
         <form onSubmit={onSubmit}>
           <label className="field">
             Имя для диплома

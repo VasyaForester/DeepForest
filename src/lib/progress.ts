@@ -1,5 +1,5 @@
 import type { Course, Lesson, LessonRecord } from "../types";
-import { courses } from "../data/curriculum";
+import { courses, isCoreCourse } from "../data/curriculum";
 
 export function courseById(id: string): Course | undefined {
   return courses.find((c) => c.id === id);
@@ -57,11 +57,46 @@ export function isLessonUnlocked(
   return Boolean(records[siblings[idx - 1].id]);
 }
 
+export function coreLessons(all: Lesson[]): Lesson[] {
+  return all.filter((l) => isCoreCourse(l.courseId));
+}
+
+function gpaIfComplete(list: Lesson[], records: Record<string, LessonRecord>): number | null {
+  if (list.length === 0) return null;
+  if (!list.every((l) => records[l.id])) return null;
+  const sum = list.reduce((s, l) => s + records[l.id].grade, 0);
+  return Math.round((sum / list.length) * 10) / 10;
+}
+
+/** GPA базового курса (школа + вузовское ядро). */
+export function isCoreComplete(all: Lesson[], records: Record<string, LessonRecord>): boolean {
+  return courses.filter((c) => isCoreCourse(c.id)).every((c) => isCourseComplete(c.id, all, records));
+}
+
+export function coreGpa(all: Lesson[], records: Record<string, LessonRecord>): number | null {
+  if (!isCoreComplete(all, records)) return null;
+  return gpaIfComplete(coreLessons(all), records);
+}
+
+/** GPA полного курса — все занятия программы. */
+export function isFullComplete(all: Lesson[], records: Record<string, LessonRecord>): boolean {
+  return courses.every((c) => isCourseComplete(c.id, all, records));
+}
+
 export function programGpa(all: Lesson[], records: Record<string, LessonRecord>): number | null {
-  if (all.length === 0) return null;
-  if (!all.every((l) => records[l.id])) return null;
-  const sum = all.reduce((s, l) => s + records[l.id].grade, 0);
-  return Math.round((sum / all.length) * 10) / 10;
+  if (!isFullComplete(all, records)) return null;
+  const ids = new Set(courses.map((c) => c.id));
+  return gpaIfComplete(
+    all.filter((l) => ids.has(l.courseId)),
+    records,
+  );
+}
+
+export function latinHonors(gpa: number): string {
+  if (gpa >= 3.7) return "summa cum laude";
+  if (gpa >= 3.3) return "magna cum laude";
+  if (gpa >= 2.7) return "cum laude";
+  return "cursus plenus";
 }
 
 export function currentGpa(records: Record<string, LessonRecord>): number | null {

@@ -81,11 +81,11 @@ export function LessonPage() {
         <section className="example" key={i}>
           <h3>Пример {i + 1}. {ex.title}</h3>
           <p>
-            <MathText text={ex.problem} />
+            <MathText inline text={ex.problem} />
           </p>
           <p>
             <strong>Решение. </strong>
-            <MathText text={ex.solution} />
+            <MathText inline text={ex.solution} />
           </p>
         </section>
       ))}
@@ -93,20 +93,20 @@ export function LessonPage() {
       <section className="example sample">
         <h3>Задание 1 — с ответом и подробным решением</h3>
         <p>
-          <MathText text={lesson.sample.prompt} />
+          <MathText inline text={lesson.sample.prompt} />
         </p>
         {lesson.sample.type === "choice" && (
           <ol>
             {lesson.sample.options.map((o) => (
               <li key={o}>
-                <MathText text={o} />
+                <MathText inline text={o} />
               </li>
             ))}
           </ol>
         )}
         <p>
           <strong>Решение. </strong>
-          <MathText text={lesson.sample.solution} />
+          <MathText inline text={lesson.sample.solution} />
         </p>
         <p className="muted">Это задание — образец, в оценку занятия не входит.</p>
       </section>
@@ -197,7 +197,7 @@ function ProblemCard({
     <section className="problem">
       <h3>Задание {n}</h3>
       <p>
-        <MathText text={problem.prompt} />
+        <MathText inline text={problem.prompt} />
       </p>
       {problem.type === "choice" ? (
         <div className="options">
@@ -216,7 +216,7 @@ function ProblemCard({
                   checked={value === String(idx)}
                   onChange={() => onChange(String(idx))}
                 />
-                <MathText text={opt} />
+                <MathText inline text={opt} />
               </label>
             );
           })}
@@ -241,7 +241,7 @@ function ProblemCard({
       {show && (
         <p>
           <strong>{ok ? "Верно. " : "Пояснение. "}</strong>
-          <MathText text={problem.explanation} />
+          <MathText inline text={problem.explanation} />
         </p>
       )}
     </section>

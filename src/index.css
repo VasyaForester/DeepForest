@@ -97,9 +97,17 @@ select {
   color: var(--pine);
 }
 
-.brand svg {
-  width: 46px;
-  height: 50px;
+.brand img,
+.hero img,
+.diploma-crest {
+  overflow: visible;
+}
+
+.brand img {
+  height: 58px;
+  width: auto;
+  flex-shrink: 0;
+  display: block;
 }
 
 .brand-name {
@@ -167,15 +175,16 @@ select {
 
 .hero {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: minmax(200px, 280px) 1fr;
   gap: 28px;
   align-items: center;
   padding: 36px;
 }
 
-.hero svg {
-  width: 160px;
+.hero img {
+  width: 100%;
   height: auto;
+  display: block;
 }
 
 .hero h1 {
@@ -266,6 +275,16 @@ select {
   color: var(--pine);
 }
 
+.pill.core {
+  background: #d8f3dc;
+  color: var(--pine);
+}
+
+.pill.advanced {
+  background: #f3ead0;
+  color: #6b5420;
+}
+
 .course-head {
   display: flex;
   justify-content: space-between;
@@ -320,6 +339,27 @@ select {
 
 .theory {
   border-left: 4px solid var(--moss);
+}
+
+.math-text {
+  font-size: 17px;
+}
+
+.math-p {
+  margin: 0 0 0.9em;
+  line-height: 1.7;
+}
+
+.math-p:last-child {
+  margin-bottom: 0;
+}
+
+.math-text .katex {
+  font-size: 1.05em;
+}
+
+.math-text .katex-mathml {
+  display: none !important;
 }
 
 .example {
@@ -400,6 +440,10 @@ select {
   margin: 0 auto;
 }
 
+.diploma-stack .diploma + .diploma {
+  margin-top: 36px;
+}
+
 .diploma {
   position: relative;
   background: #fffdf6;
@@ -411,10 +455,74 @@ select {
   color: var(--bark-dark);
 }
 
+.diploma-laureate {
+  background: linear-gradient(180deg, #fffef8 0%, #f8f0d4 100%);
+  border: 16px double #1b4332;
+  outline: 3px solid #c9a227;
+  outline-offset: -28px;
+  padding: 56px 56px 40px;
+  box-shadow: inset 0 0 0 6px #fffef8, inset 0 0 0 8px #c9a227;
+}
+
+.diploma-ornament {
+  pointer-events: none;
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(201, 162, 39, 0.55);
+}
+
+.diploma-ornament::before,
+.diploma-ornament::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: #1b4332;
+  border-style: solid;
+}
+
+.diploma-ornament::before {
+  top: -2px;
+  left: -2px;
+  border-width: 3px 0 0 3px;
+}
+
+.diploma-ornament::after {
+  right: -2px;
+  bottom: -2px;
+  border-width: 0 3px 3px 0;
+}
+
+.diploma-ornament .ornament-tr,
+.diploma-ornament .ornament-bl {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: #1b4332;
+  border-style: solid;
+}
+
+.diploma-ornament .ornament-tr {
+  top: -2px;
+  right: -2px;
+  border-width: 3px 3px 0 0;
+}
+
+.diploma-ornament .ornament-bl {
+  left: -2px;
+  bottom: -2px;
+  border-width: 0 0 3px 3px;
+}
+
 .diploma-crest {
-  width: 110px;
-  height: 122px;
-  margin: 6px auto 0;
+  width: min(280px, 100%);
+  height: auto;
+  margin: 10px auto 4px;
+  display: block;
+}
+
+.diploma-crest-lg {
+  width: min(340px, 100%);
 }
 
 .diploma h1 {
@@ -423,11 +531,23 @@ select {
   color: var(--pine);
 }
 
+.diploma-laureate h1 {
+  font-size: 46px;
+  color: #8a6d2b;
+}
+
 .diploma .latin {
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--gold);
   font-size: 13px;
+}
+
+.diploma .latin.honors {
+  letter-spacing: 0.2em;
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #8a6d2b;
 }
 
 .diploma p.body {
@@ -468,12 +588,27 @@ select {
     border-width: 10px;
     outline-offset: -16px;
   }
+  .diploma-laureate {
+    border-width: 12px;
+    outline-offset: -22px;
+    box-shadow: none;
+    background: #fffef8;
+  }
+  .diploma-stack .diploma + .diploma {
+    break-before: page;
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 760px) {
   .hero {
     grid-template-columns: 1fr;
     padding: 22px;
+  }
+  .hero img {
+    margin: 0 auto;
+    width: min(220px, 70%);
+    height: auto;
   }
   .hero h1 {
     font-size: 34px;
