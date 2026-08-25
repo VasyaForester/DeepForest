@@ -1,0 +1,90 @@
+import type { Course, Lesson, LessonRecord } from "../types";
+import { courses } from "../data/curriculum";
+
+export function courseById(id: string): Course | undefined {
+  return courses.find((c) => c.id === id);
+}
+
+export function lessonsOf(all: Lesson[], courseId: string): Lesson[] {
+  return all.filter((l) => l.courseId === courseId);
+}
+
+export function isCourseComplete(
+  courseId: string,
+  all: Lesson[],
+  records: Record<string, LessonRecord>,
+): boolean {
+  const list = lessonsOf(all, courseId);
+  return list.length > 0 && list.every((l) => records[l.id]);
+}
+
+export function schoolCourses(): Course[] {
+  return courses.filter((c) => c.phase === "school").sort((a, b) => a.order - b.order);
+}
+
+export function universityCourses(): Course[] {
+  return courses.filter((c) => c.phase === "university").sort((a, b) => a.order - b.order);
+}
+
+export function isSchoolComplete(all: Lesson[], records: Record<string, LessonRecord>): boolean {
+  return schoolCourses().every((c) => isCourseComplete(c.id, all, records));
+}
+
+export function isCourseUnlocked(
+  course: Course,
+  all: Lesson[],
+  records: Record<string, LessonRecord>,
+): boolean {
+  if (course.phase === "school") {
+    const prev = schoolCourses().filter((c) => c.order < course.order);
+    return prev.every((c) => isCourseComplete(c.id, all, records));
+  }
+  if (!isSchoolComplete(all, records)) return false;
+  return course.requires.every((id) => isCourseComplete(id, all, records));
+}
+
+export function isLessonUnlocked(
+  lesson: Lesson,
+  all: Lesson[],
+  records: Record<string, LessonRecord>,
+): boolean {
+  const course = courseById(lesson.courseId);
+  if (!course) return false;
+  if (!isCourseUnlocked(course, all, records)) return false;
+  const siblings = lessonsOf(all, lesson.courseId);
+  const idx = siblings.findIndex((l) => l.id === lesson.id);
+  if (idx <= 0) return true;
+  return Boolean(records[siblings[idx - 1].id]);
+}
+
+export function programGpa(all: Lesson[], records: Record<string, LessonRecord>): number | null {
+  if (all.length === 0) return null;
+  if (!all.every((l) => records[l.id])) return null;
+  const sum = all.reduce((s, l) => s + records[l.id].grade, 0);
+  return Math.round((sum / all.length) * 10) / 10;
+}
+
+export function currentGpa(records: Record<string, LessonRecord>): number | null {
+  const vals = Object.values(records);
+  if (vals.length === 0) return null;
+  const sum = vals.reduce((s, r) => s + r.grade, 0);
+  return Math.round((sum / vals.length) * 10) / 10;
+}
+
+export function nextLesson(
+  current: Lesson,
+  all: Lesson[],
+): Lesson | null {
+  const siblings = lessonsOf(all, current.courseId);
+  const idx = siblings.findIndex((l) => l.id === current.id);
+  if (idx >= 0 && idx < siblings.length - 1) return siblings[idx + 1];
+  const course = courseById(current.courseId);
+  if (!course) return null;
+  const ordered = [...courses].sort((a, b) => a.order - b.order);
+  const cidx = ordered.findIndex((c) => c.id === course.id);
+  for (let i = cidx + 1; i < ordered.length; i++) {
+    const list = lessonsOf(all, ordered[i].id);
+    if (list[0]) return list[0];
+  }
+  return null;
+}
