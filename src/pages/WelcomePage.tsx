@@ -28,7 +28,7 @@ export function WelcomePage() {
       <Crest />
       <div>
         <h1>Deep Forest Academy</h1>
-        <p className="muted">Онлайн-тренажер по математике</p>
+        <p className="muted">углубленное изучение математики</p>
         <form onSubmit={onSubmit}>
           <label className="field">
             Имя для диплома
