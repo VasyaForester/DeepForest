@@ -1,5 +1,6 @@
 import type { Lesson } from "../../types";
 import { courses } from "../curriculum";
+import { applyLessonExtras } from "../lessonExtras";
 
 const modules = import.meta.glob("./courses/*.ts", { eager: true }) as Record<
   string,
@@ -19,7 +20,7 @@ function collect(): Lesson[] {
   });
 }
 
-export const lessons: Lesson[] = collect();
+export const lessons: Lesson[] = collect().map(applyLessonExtras);
 
 export function getLessons(): Lesson[] {
   return lessons;

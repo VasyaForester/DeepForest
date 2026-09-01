@@ -1120,4 +1120,643 @@ $2\sin\alpha\sin\beta=\cos(\alpha-\beta)-\cos(\alpha+\beta)$.
       },
     ],
   }),
+
+  makeLesson("school-trig", 10, "Синус, косинус и тангенс острого угла", {
+    purpose:
+      "В прямоугольном треугольнике тригонометрия начинается с отношений сторон. Эти определения дают табличные значения острых углов и связывают алгебру с геометрией треугольника.",
+    nonexample: {
+      title: "Противолежащий катет — не любой катет",
+      text: String.raw`Для угла $A$ противолежащая сторона — та, что лежит напротив $A$, а прилежащий катет — другой катет, не гипотенуза. Смешать катеты — типичная ошибка: тогда синус и косинус меняются местами.`,
+    },
+    theory: String.raw`В прямоугольном треугольнике с острым углом $\alpha$ синус — отношение противолежащего катета к гипотенузе, косинус — отношение прилежащего катета к гипотенузе, тангенс — отношение противолежащего катета к прилежащему:
+$\sin\alpha=\dfrac{\text{противолежащий}}{\text{гипотенуза}}$, $\cos\alpha=\dfrac{\text{прилежащий}}{\text{гипотенуза}}$, $\tan\alpha=\dfrac{\text{противолежащий}}{\text{прилежащий}}$.
+
+Для острых углов все три величины положительны. Гипотенуза длиннее катета, поэтому $\sin\alpha<1$ и $\cos\alpha<1$. Дополнительный угол: $\sin(90^{\circ}-\alpha)=\cos\alpha$, $\tan(90^{\circ}-\alpha)=\cot\alpha$.
+
+Основное тождество $\sin^{2}\alpha+\cos^{2}\alpha=1$ следует из теоремы Пифагора. Табличные углы $30^{\circ}$, $45^{\circ}$, $60^{\circ}$ получают из равностороннего и равнобедренного прямоугольного треугольников.`,
+    examples: [
+      {
+        title: "Треугольник со сторонами $3$, $4$, $5$",
+        problem: String.raw`В прямоугольном треугольнике катеты равны $3$ и $4$, гипотенуза равна $5$. Найдите синус угла, противолежащего катету $3$.`,
+        solution: String.raw`Синус — отношение противолежащего катета к гипотенузе: $\sin\alpha=\dfrac{3}{5}$.`,
+      },
+      {
+        title: "Тангенс",
+        problem: String.raw`В том же треугольнике найдите тангенс угла, противолежащего катету $3$.`,
+        solution: String.raw`Прилежащий катет равен $4$, поэтому $\tan\alpha=\dfrac{3}{4}$.`,
+      },
+    ],
+    sample: {
+      id: "tr11-s",
+      type: "open",
+      prompt: String.raw`В прямоугольном треугольнике противолежащий катет равен $5$, гипотенуза равна $13$. Найдите синус острого угла.`,
+      accepted: ["5/13", "frac{5}{13}"],
+      explanation: String.raw`$\sin\alpha=\dfrac{5}{13}$.`,
+      solution: String.raw`По определению синус острого угла — отношение противолежащего катета к гипотенузе: $\dfrac{5}{13}$.`,
+    },
+    problems: [
+      {
+        id: "tr11-q1",
+        type: "choice",
+        prompt: String.raw`Синус острого угла в прямоугольном треугольнике — это отношение`,
+        options: [
+          "прилежащего катета к гипотенузе",
+          "противолежащего катета к гипотенузе",
+          "противолежащего катета к прилежащему",
+          "гипотенузы к катету",
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Определение: противолежащий катет на гипотенузу.`,
+      },
+      {
+        id: "tr11-q2",
+        type: "open",
+        prompt: String.raw`Катеты равны $6$ и $8$, гипотенуза равна $10$. Найдите косинус угла, прилежащего к катету $6$.`,
+        accepted: ["3/5", "0.6", "0,6", "frac{3}{5}"],
+        explanation: String.raw`Прилежащий катет $6$, гипотенуза $10$: $\dfrac{6}{10}=\dfrac{3}{5}$.`,
+      },
+      {
+        id: "tr11-q3",
+        type: "choice",
+        prompt: String.raw`Равенство $\sin(90^{\circ}-\alpha)=\cos\alpha$ для острого $\alpha$`,
+        options: [
+          "неверно",
+          "верно: дополнительный угол меняет синус на косинус",
+          "верно только при $\alpha=45^{\circ}$",
+          "верно только в радианах",
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Противолежащий катет для одного острого угла — прилежащий для другого.`,
+      },
+      {
+        id: "tr11-q4",
+        type: "open",
+        prompt: String.raw`Противолежащий катет равен $3$, прилежащий равен $4$. Найдите тангенс острого угла.`,
+        accepted: ["3/4", "0.75", "0,75", "frac{3}{4}"],
+        explanation: String.raw`$\tan\alpha=\dfrac{3}{4}$.`,
+      },
+      {
+        id: "tr11-q5",
+        type: "choice",
+        prompt: String.raw`Для острого угла синус, косинус и тангенс`,
+        options: [
+          "могут быть отрицательными",
+          "положительны",
+          "равны нулю",
+          "не определены",
+        ],
+        answerIndex: 1,
+        explanation: String.raw`В первой четверти все три функции положительны; острый угол лежит там.`,
+      },
+      {
+        id: "tr11-q6",
+        type: "open",
+        prompt: String.raw`Прилежащий катет равен $8$, гипотенуза равна $10$. Найдите косинус острого угла.`,
+        accepted: ["4/5", "0.8", "0,8", "frac{4}{5}"],
+        explanation: String.raw`$\dfrac{8}{10}=\dfrac{4}{5}$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Атанасян Л.С., Бутузов В.Ф., Кадомцев С.Б. и др.",
+        title: "Геометрия. 7–9 классы",
+        note: "Синус, косинус и тангенс острого угла",
+      },
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "Тригонометрия прямоугольного треугольника",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 11, "Тангенс и котангенс: формулы", {
+    purpose:
+      "Тангенс и котангенс выражают через синус и косинус и связаны основным тождеством. Эти формулы упрощают выражения и сводят уравнения к виду $\\tan x=a$.",
+    nonexample: {
+      title: "При нулевом косинусе тангенса нет",
+      text: String.raw`Тангенс $\tan\alpha=\dfrac{\sin\alpha}{\cos\alpha}$ не определён, когда $\cos\alpha=0$, то есть при $\alpha=\dfrac{\pi}{2}+\pi k$. Писать «$\tan\dfrac{\pi}{2}=\infty$» в школьном курсе не принято: значения просто нет.`,
+    },
+    theory: String.raw`По определению $\tan\alpha=\dfrac{\sin\alpha}{\cos\alpha}$ и $\cot\alpha=\dfrac{\cos\alpha}{\sin\alpha}$ там, где знаменатель не равен нулю. На общей области определения $\tan\alpha\cdot\cot\alpha=1$.
+
+Следствия основного тождества: $1+\tan^{2}\alpha=\dfrac{1}{\cos^{2}\alpha}$ и $1+\cot^{2}\alpha=\dfrac{1}{\sin^{2}\alpha}$. Основной период обеих функций равен $\pi$. Тангенс — нечётная функция: $\tan(-\alpha)=-\tan\alpha$.
+
+Табличные значения: $\tan 0=0$, $\tan\dfrac{\pi}{6}=\dfrac{1}{\sqrt{3}}$, $\tan\dfrac{\pi}{4}=1$, $\tan\dfrac{\pi}{3}=\sqrt{3}$. Котангенс в тех же точках — обратные величины (где определён).`,
+    examples: [
+      {
+        title: "Через синус и косинус",
+        problem: String.raw`Дано $\sin\alpha=\dfrac{3}{5}$, $\cos\alpha=\dfrac{4}{5}$. Найдите $\tan\alpha$.`,
+        solution: String.raw`$\tan\alpha=\dfrac{3/5}{4/5}=\dfrac{3}{4}$.`,
+      },
+      {
+        title: "Следствие тождества",
+        problem: String.raw`Вычислите $1+\tan^{2}\dfrac{\pi}{4}$.`,
+        solution: String.raw`$\tan\dfrac{\pi}{4}=1$, поэтому $1+1=2$. С другой стороны, $\dfrac{1}{\cos^{2}(\pi/4)}=\dfrac{1}{1/2}=2$.`,
+      },
+    ],
+    sample: {
+      id: "tr12-s",
+      type: "open",
+      prompt: String.raw`Найдите $\tan\alpha$, если $\sin\alpha=\dfrac{5}{13}$ и $\cos\alpha=\dfrac{12}{13}$.`,
+      accepted: ["5/12", "frac{5}{12}"],
+      explanation: String.raw`$\tan\alpha=\dfrac{5}{12}$.`,
+      solution: String.raw`По определению $\tan\alpha=\dfrac{\sin\alpha}{\cos\alpha}=\dfrac{5/13}{12/13}=\dfrac{5}{12}$.`,
+    },
+    problems: [
+      {
+        id: "tr12-q1",
+        type: "choice",
+        prompt: String.raw`Формула тангенса имеет вид`,
+        options: [
+          String.raw`$\tan\alpha=\sin\alpha\cos\alpha$`,
+          String.raw`$\tan\alpha=\dfrac{\sin\alpha}{\cos\alpha}$`,
+          String.raw`$\tan\alpha=\dfrac{\cos\alpha}{\sin\alpha}$`,
+          String.raw`$\tan\alpha=\sin\alpha+\cos\alpha$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Тангенс — отношение синуса к косинусу.`,
+      },
+      {
+        id: "tr12-q2",
+        type: "open",
+        prompt: String.raw`Найдите $\tan\alpha$, если $\sin\alpha=\dfrac{3}{5}$ и $\cos\alpha=\dfrac{4}{5}$.`,
+        accepted: ["3/4", "0.75", "0,75", "frac{3}{4}"],
+        explanation: String.raw`$\dfrac{3}{4}$.`,
+      },
+      {
+        id: "tr12-q3",
+        type: "choice",
+        prompt: String.raw`Тождество $1+\tan^{2}\alpha$ равно`,
+        options: [
+          String.raw`$\dfrac{1}{\sin^{2}\alpha}$`,
+          String.raw`$\dfrac{1}{\cos^{2}\alpha}$`,
+          String.raw`$\sin^{2}\alpha$`,
+          String.raw`$1$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Следствие основного тождества после деления на $\cos^{2}\alpha$.`,
+      },
+      {
+        id: "tr12-q4",
+        type: "open",
+        prompt: String.raw`Найдите $\tan\dfrac{\pi}{4}$.`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`Синус и косинус равны, отношение равно $1$.`,
+      },
+      {
+        id: "tr12-q5",
+        type: "choice",
+        prompt: String.raw`Тангенс не определён, когда`,
+        options: [
+          String.raw`$\sin\alpha=0$`,
+          String.raw`$\cos\alpha=0$`,
+          String.raw`$\alpha=0$`,
+          String.raw`$\alpha=\pi$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Знаменатель $\cos\alpha$ равен нулю при $\alpha=\dfrac{\pi}{2}+\pi k$.`,
+      },
+      {
+        id: "tr12-q6",
+        type: "open",
+        prompt: String.raw`Известно, что $\tan\alpha=2$ и котангенс определён. Найдите $\cot\alpha$.`,
+        accepted: ["1/2", "0.5", "0,5", "frac{1}{2}"],
+        explanation: String.raw`$\cot\alpha=\dfrac{1}{\tan\alpha}=\dfrac{1}{2}$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Колмогоров А.Н., Абрамов А.М., Дудницын Ю.П. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "Тангенс и котангенс, следствия основного тождества",
+      },
+      {
+        authors: "Мордкович А.Г.",
+        title: "Алгебра и начала математического анализа",
+        note: "Формулы тангенса и котангенса",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 12, "Уравнения sin x = a и cos x = a", {
+    purpose:
+      "Общие семейства корней — основа всех тригонометрических уравнений. Нужно записывать оба решения на периоде и не терять слагаемое $2\\pi k$.",
+    nonexample: {
+      title: "Не один корень, а два семейства",
+      text: String.raw`Уравнение $\sin x=\dfrac{1}{2}$ имеет не единственный корень $\dfrac{\pi}{6}$, а два семейства: $x=\dfrac{\pi}{6}+2\pi k$ и $x=\dfrac{5\pi}{6}+2\pi k$, $k\in\mathbb{Z}$. Записать только первое — типичный пропуск.`,
+    },
+    theory: String.raw`Уравнение $\sin x=a$ при $|a|\leq 1$ имеет решения $x=(-1)^{k}\arcsin a+\pi k$, $k\in\mathbb{Z}$. Равносильная запись двумя семействами: $x=\arcsin a+2\pi k$ и $x=\pi-\arcsin a+2\pi k$. Если $|a|>1$, решений нет.
+
+Уравнение $\cos x=a$ при $|a|\leq 1$: $x=\pm\arccos a+2\pi k$. Если $|a|>1$, решений нет.
+
+Частные случаи удобно помнить отдельно: $\sin x=0$ даёт $x=\pi k$; $\sin x=1$ даёт $x=\dfrac{\pi}{2}+2\pi k$; $\sin x=-1$ даёт $x=-\dfrac{\pi}{2}+2\pi k$; $\cos x=0$ даёт $x=\dfrac{\pi}{2}+\pi k$; $\cos x=1$ даёт $x=2\pi k$; $\cos x=-1$ даёт $x=\pi+2\pi k$. На промежутке длины $2\pi$ у уравнений $\sin x=a$ и $\cos x=a$ при $|a|<1$ ровно два корня, при $|a|=1$ — один.`,
+    examples: [
+      {
+        title: "Синус",
+        problem: String.raw`Решите уравнение $\sin x=\dfrac{\sqrt{2}}{2}$.`,
+        solution: String.raw`$\arcsin\dfrac{\sqrt{2}}{2}=\dfrac{\pi}{4}$. Семейства: $x=\dfrac{\pi}{4}+2\pi k$ и $x=\dfrac{3\pi}{4}+2\pi k$, $k\in\mathbb{Z}$.`,
+      },
+      {
+        title: "Косинус",
+        problem: String.raw`Решите уравнение $\cos x=-\dfrac{1}{2}$.`,
+        solution: String.raw`$\arccos\bigl(-\dfrac{1}{2}\bigr)=\dfrac{2\pi}{3}$. Общее решение: $x=\pm\dfrac{2\pi}{3}+2\pi k$, $k\in\mathbb{Z}$.`,
+      },
+    ],
+    sample: {
+      id: "tr13-s",
+      type: "open",
+      prompt: String.raw`Сколько корней имеет уравнение $\sin x=\dfrac{1}{2}$ на промежутке $[0;2\pi)$?`,
+      accepted: ["2", "2.0"],
+      explanation: String.raw`Корни $\dfrac{\pi}{6}$ и $\dfrac{5\pi}{6}$.`,
+      solution: String.raw`На периоде два решения: $\dfrac{\pi}{6}$ и $\dfrac{5\pi}{6}$. Оба лежат в $[0;2\pi)$. Следующие получаются сдвигом на $2\pi$ и в промежуток не входят.`,
+    },
+    problems: [
+      {
+        id: "tr13-q1",
+        type: "choice",
+        prompt: String.raw`Уравнение $\sin x=2$`,
+        options: [
+          String.raw`имеет корень $x=2$`,
+          "не имеет решений",
+          String.raw`имеет корни $x=\arcsin 2$`,
+          "имеет ровно один корень",
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Значения синуса лежат в $[-1;1]$.`,
+      },
+      {
+        id: "tr13-q2",
+        type: "open",
+        prompt: String.raw`Сколько корней уравнения $\sin x=0$ лежит на $[0;2\pi)$?`,
+        accepted: ["2", "2.0"],
+        explanation: String.raw`Точки $0$ и $\pi$ (значение $2\pi$ не входит).`,
+      },
+      {
+        id: "tr13-q3",
+        type: "choice",
+        prompt: String.raw`Общее решение уравнения $\sin x=1$ имеет вид`,
+        options: [
+          String.raw`$x=\pi k$`,
+          String.raw`$x=\dfrac{\pi}{2}+2\pi k$`,
+          String.raw`$x=\pi+2\pi k$`,
+          String.raw`$x=2\pi k$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Синус равен $1$ только в точках $\dfrac{\pi}{2}+2\pi k$.`,
+      },
+      {
+        id: "tr13-q4",
+        type: "open",
+        prompt: String.raw`Найдите наименьший положительный корень уравнения $\cos x=\dfrac{1}{2}$.`,
+        accepted: ["π/3", "pi/3", "frac{π}{3}", "frac{pi}{3}", "\\frac{\\pi}{3}"],
+        explanation: String.raw`$x=\pm\dfrac{\pi}{3}+2\pi k$; наименьший положительный — $\dfrac{\pi}{3}$.`,
+      },
+      {
+        id: "tr13-q5",
+        type: "choice",
+        prompt: String.raw`Общее решение уравнения $\cos x=-1$ — это`,
+        options: [
+          String.raw`$x=2\pi k$`,
+          String.raw`$x=\pi+2\pi k$`,
+          String.raw`$x=\dfrac{\pi}{2}+\pi k$`,
+          String.raw`$x=\pi k$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Косинус равен $-1$ в точках $\pi+2\pi k$.`,
+      },
+      {
+        id: "tr13-q6",
+        type: "open",
+        prompt: String.raw`Сколько корней уравнения $\cos x=0$ лежит на $[0;2\pi)$?`,
+        accepted: ["2", "2.0"],
+        explanation: String.raw`Точки $\dfrac{\pi}{2}$ и $\dfrac{3\pi}{2}$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Мордкович А.Г.",
+        title: "Алгебра и начала математического анализа",
+        note: "Простейшие уравнения $\\sin x=a$ и $\\cos x=a$",
+      },
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "Общие формулы решений, отбор корней на промежутке",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 13, "Однородные тригонометрические уравнения", {
+    purpose:
+      "Уравнения, однородные относительно синуса и косинуса, сводят к уравнению на тангенс. Приём убирает «смесь» двух функций и входит в типовые варианты.",
+    nonexample: {
+      title: "Деление на косинус может потерять корни",
+      text: String.raw`Делить на $\cos x$ (или на $\cos^{2} x$) можно только там, где он не равен нулю. Сначала проверяют, удовлетворяют ли точки $\cos x=0$ исходному уравнению. Если да — их записывают отдельно; если нет — деление законно на всей области.`,
+    },
+    theory: String.raw`Уравнение первой степени $a\sin x+b\cos x=0$ однородно. Если $\cos x=0$, то $\sin x=\pm 1$ и условие превращается в $a=0$. При $a\neq 0$ эти точки не являются корнями, можно делить на $\cos x$ и получать $\tan x=-\dfrac{b}{a}$.
+
+Уравнение второй степени $a\sin^{2} x+b\sin x\cos x+c\cos^{2} x=0$ однородно порядка $2$. При $a\neq 0$ точки $\cos x=0$ снова не подходят (остаётся $a=0$). Деление на $\cos^{2} x$ даёт квадратное уравнение относительно $t=\tan x$.
+
+После нахождения $t$ решают простейшее уравнение $\tan x=t$: $x=\arctan t+\pi k$. Посторонних корней от деления нет, если проверка $\cos x=0$ уже сделана.`,
+    examples: [
+      {
+        title: "Первая степень",
+        problem: String.raw`Решите уравнение $\sin x-\cos x=0$.`,
+        solution: String.raw`При $\cos x=0$ получили бы $\pm 1=0$ — невозможно. Делим: $\tan x=1$, $x=\dfrac{\pi}{4}+\pi k$, $k\in\mathbb{Z}$.`,
+      },
+      {
+        title: "Вторая степень",
+        problem: String.raw`Решите $\sin^{2} x-\sin x\cos x=0$.`,
+        solution: String.raw`$\sin x(\sin x-\cos x)=0$. Либо $\sin x=0$, $x=\pi k$, либо $\tan x=1$, $x=\dfrac{\pi}{4}+\pi k$. (Проверка: при $\sin x=0$ исходное выполняется.)`,
+      },
+    ],
+    sample: {
+      id: "tr14-s",
+      type: "open",
+      prompt: String.raw`Найдите наименьший положительный корень уравнения $\sin x=\cos x$.`,
+      accepted: ["π/4", "pi/4", "frac{π}{4}", "frac{pi}{4}", "\\frac{\\pi}{4}"],
+      explanation: String.raw`$\tan x=1$, $x=\dfrac{\pi}{4}+\pi k$; наименьший положительный — $\dfrac{\pi}{4}$.`,
+      solution: String.raw`Точки $\cos x=0$ не подходят. Деление даёт $\tan x=1$, откуда $x=\dfrac{\pi}{4}+\pi k$. Наименьший положительный корень равен $\dfrac{\pi}{4}$. Проверка: $\sin\dfrac{\pi}{4}=\cos\dfrac{\pi}{4}$.`,
+    },
+    problems: [
+      {
+        id: "tr14-q1",
+        type: "choice",
+        prompt: String.raw`Уравнение $\sin x=\cos x$ при $\cos x\neq 0$ равносильно`,
+        options: [
+          String.raw`$\tan x=0$`,
+          String.raw`$\tan x=1$`,
+          String.raw`$\tan x=-1$`,
+          String.raw`$\sin x=1$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Деление на $\cos x$ даёт $\tan x=1$.`,
+      },
+      {
+        id: "tr14-q2",
+        type: "open",
+        prompt: String.raw`Найдите наименьший положительный корень уравнения $\sin x=\sqrt{3}\cos x$.`,
+        accepted: ["π/3", "pi/3", "frac{π}{3}", "frac{pi}{3}", "\\frac{\\pi}{3}"],
+        explanation: String.raw`$\tan x=\sqrt{3}$, $x=\dfrac{\pi}{3}+\pi k$.`,
+      },
+      {
+        id: "tr14-q3",
+        type: "choice",
+        prompt: String.raw`Если в уравнении $2\sin x+\cos x=0$ подставить $\cos x=0$, получится`,
+        options: [
+          "тождество, значит эти точки — корни",
+          "противоречие $2\cdot(\pm 1)=0$, значит делить на косинус можно",
+          "уравнение $\sin x=0$",
+          "уравнение $\tan x=2$",
+        ],
+        answerIndex: 1,
+        explanation: String.raw`При $\cos x=0$ имеем $\sin x=\pm 1$, тогда $\pm 2=0$ — ложь. Потерь нет.`,
+      },
+      {
+        id: "tr14-q4",
+        type: "open",
+        prompt: String.raw`Сколько корней уравнения $\sin x+\cos x=0$ лежит на $[0;2\pi)$?`,
+        accepted: ["2", "2.0"],
+        explanation: String.raw`$\tan x=-1$: точки $\dfrac{3\pi}{4}$ и $\dfrac{7\pi}{4}$.`,
+      },
+      {
+        id: "tr14-q5",
+        type: "choice",
+        prompt: String.raw`После деления однородного уравнения $a\sin^{2} x+b\sin x\cos x+c\cos^{2} x=0$ на $\cos^{2} x$ получают уравнение относительно`,
+        options: [
+          String.raw`$\sin x$`,
+          String.raw`$\tan x$`,
+          String.raw`$x$ без тригонометрии`,
+          String.raw`$\cos 2x$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Появляется $a t^{2}+b t+c=0$, где $t=\tan x$.`,
+      },
+      {
+        id: "tr14-q6",
+        type: "open",
+        prompt: String.raw`Найдите наименьший положительный корень уравнения $\sin x+\cos x=0$.`,
+        accepted: ["3π/4", "3pi/4", "frac{3π}{4}", "frac{3pi}{4}", "\\frac{3\\pi}{4}"],
+        explanation: String.raw`$\tan x=-1$, наименьший положительный корень — $\dfrac{3\pi}{4}$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "Однородные тригонометрические уравнения",
+      },
+      {
+        authors: "Никольский С.М., Потапов М.К., Решетников Н.Н., Шевкин А.В.",
+        title: "Алгебра и начала математического анализа. 10–11 классы",
+        note: "Сведение к уравнению относительно тангенса",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 14, "Простейшие уравнения с арксинусом и арктангенсом", {
+    purpose:
+      "Арксинус и арктангенс уже введены как функции; теперь решают уравнения $\\arcsin x=a$ и $\\arctan x=a$. Нужно помнить область значений: иначе появляются посторонние «корни».",
+    nonexample: {
+      title: "Арксинус не бывает равен $\\pi$",
+      text: String.raw`Уравнение $\arcsin x=\pi$ решений не имеет: число $\pi$ не лежит на отрезке $\bigl[-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\bigr]$. Ошибка — взять синус от $\pi$ и ответить $x=0$: равенство $\arcsin 0=0$, а не $\pi$.`,
+    },
+    theory: String.raw`Уравнение $\arcsin x=a$ имеет решение тогда и только тогда, когда $a\in\bigl[-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\bigr]$. В этом случае $x=\sin a$, и автоматически $x\in[-1;1]$. Если $a$ вне отрезка значений арксинуса, корней нет.
+
+Уравнение $\arctan x=a$ разрешимо при $a\in\bigl(-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\bigr)$; тогда $x=\tan a$. Вне этого интервала решений нет.
+
+Тождество $\sin(\arcsin x)=x$ верно на $[-1;1]$, а $\arcsin(\sin a)=a$ — только когда $a$ уже лежит в области значений арксинуса. Аналогично для арктангенса: $\tan(\arctan x)=x$ на всей прямой, но $\arctan(\tan a)=a$ лишь при $a\in\bigl(-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\bigr)$.`,
+    examples: [
+      {
+        title: "Арксинус",
+        problem: String.raw`Решите уравнение $\arcsin x=\dfrac{\pi}{6}$.`,
+        solution: String.raw`Число $\dfrac{\pi}{6}$ лежит в области значений арксинуса, поэтому $x=\sin\dfrac{\pi}{6}=\dfrac{1}{2}$.`,
+      },
+      {
+        title: "Арктангенс",
+        problem: String.raw`Решите уравнение $\arctan x=\dfrac{\pi}{4}$.`,
+        solution: String.raw`$\dfrac{\pi}{4}\in\bigl(-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\bigr)$, значит $x=\tan\dfrac{\pi}{4}=1$.`,
+      },
+    ],
+    sample: {
+      id: "tr15-s",
+      type: "open",
+      prompt: String.raw`Решите уравнение $\arcsin x=\dfrac{\pi}{2}$.`,
+      accepted: ["1", "1.0"],
+      explanation: String.raw`$x=\sin\dfrac{\pi}{2}=1$.`,
+      solution: String.raw`Значение $\dfrac{\pi}{2}$ — правый конец области значений арксинуса. По определению $x=\sin\dfrac{\pi}{2}=1$. Проверка: $\arcsin 1=\dfrac{\pi}{2}$.`,
+    },
+    problems: [
+      {
+        id: "tr15-q1",
+        type: "choice",
+        prompt: String.raw`Уравнение $\arcsin x=\pi$`,
+        options: [
+          String.raw`имеет корень $x=0$`,
+          "не имеет решений",
+          String.raw`имеет корень $x=-1$`,
+          String.raw`имеет корень $x=1$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Число $\pi$ не принадлежит области значений арксинуса.`,
+      },
+      {
+        id: "tr15-q2",
+        type: "open",
+        prompt: String.raw`Решите уравнение $\arcsin x=0$.`,
+        accepted: ["0", "0.0"],
+        explanation: String.raw`$x=\sin 0=0$.`,
+      },
+      {
+        id: "tr15-q3",
+        type: "choice",
+        prompt: String.raw`Область значений $\arctan$ — это`,
+        options: [
+          String.raw`$[0;\,\pi]$`,
+          String.raw`$\bigl(-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\bigr)$`,
+          String.raw`$\bigl[-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\bigr]$`,
+          String.raw`$\mathbb{R}$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Арктангенс принимает значения из открытого интервала $\bigl(-\dfrac{\pi}{2};\,\dfrac{\pi}{2}\bigr)$.`,
+      },
+      {
+        id: "tr15-q4",
+        type: "open",
+        prompt: String.raw`Решите уравнение $\arctan x=\dfrac{\pi}{4}$.`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`$x=\tan\dfrac{\pi}{4}=1$.`,
+      },
+      {
+        id: "tr15-q5",
+        type: "choice",
+        prompt: String.raw`Корень уравнения $\arcsin x=-\dfrac{\pi}{2}$ равен`,
+        options: ["$0$", "$1$", "$-1$", "не существует"],
+        answerIndex: 2,
+        explanation: String.raw`$x=\sin\bigl(-\dfrac{\pi}{2}\bigr)=-1$.`,
+      },
+      {
+        id: "tr15-q6",
+        type: "open",
+        prompt: String.raw`Решите уравнение $\arcsin x=\dfrac{\pi}{6}$.`,
+        accepted: ["1/2", "0.5", "0,5", "frac{1}{2}"],
+        explanation: String.raw`$x=\sin\dfrac{\pi}{6}=\dfrac{1}{2}$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Никольский С.М., Потапов М.К., Решетников Н.Н., Шевкин А.В.",
+        title: "Алгебра и начала математического анализа. 10–11 классы",
+        note: "Уравнения с обратными тригонометрическими функциями",
+      },
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "Область значений арксинуса и арктангенса",
+      },
+    ],
+  }),
+
+  makeLesson("school-trig", 15, "Практика тригонометрических тождеств", {
+    purpose:
+      "Тождество проверяют на общей области, где обе части определены. Практика соединяет основное тождество, двойной угол и формулы тангенса в одно упрощение.",
+    nonexample: {
+      title: "Нельзя без проверки делить на синус",
+      text: String.raw`«Доказать» равенство, разделив обе части на $\sin x$, нельзя: при $\sin x=0$ исходные выражения могут быть определены, а сокращение теряет этот случай. Сначала указывают область, затем преобразуют, не уничтожая множители, которые могут обратиться в нуль.`,
+    },
+    theory: String.raw`Доказать тождество — значит показать, что на общей области определения левая часть равна правой. Обычно одну сторону приводят к другой или обе — к одному и тому же выражению.
+
+Опорные формулы: $\sin^{2}\alpha+\cos^{2}\alpha=1$; $\sin 2\alpha=2\sin\alpha\cos\alpha$; $\cos 2\alpha=\cos^{2}\alpha-\sin^{2}\alpha=2\cos^{2}\alpha-1=1-2\sin^{2}\alpha$; $\tan\alpha\cdot\cot\alpha=1$. Формулы понижения степени: $\sin^{2}\alpha=\dfrac{1-\cos 2\alpha}{2}$, $\cos^{2}\alpha=\dfrac{1+\cos 2\alpha}{2}$.
+
+Если в выражении есть тангенс, его часто заменяют отношением синуса к косинусу и приводят к общему знаменателю. Численная проверка в одной точке не заменяет доказательства, но помогает поймать ошибку в знаке.`,
+    examples: [
+      {
+        title: "Основное тождество",
+        problem: String.raw`Упростите $\sin^{2}\dfrac{\pi}{5}+\cos^{2}\dfrac{\pi}{5}$.`,
+        solution: String.raw`По основному тождеству сумма квадратов равна $1$ при любом угле, в том числе $\dfrac{\pi}{5}$.`,
+      },
+      {
+        title: "Двойной угол",
+        problem: String.raw`Вычислите $2\sin\dfrac{\pi}{4}\cos\dfrac{\pi}{4}$.`,
+        solution: String.raw`Это $\sin\dfrac{\pi}{2}=1$. Напрямую: $2\cdot\dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{2}}{2}=1$.`,
+      },
+    ],
+    sample: {
+      id: "tr16-s",
+      type: "open",
+      prompt: String.raw`Вычислите $\sin^{2}\dfrac{\pi}{7}+\cos^{2}\dfrac{\pi}{7}$.`,
+      accepted: ["1", "1.0"],
+      explanation: String.raw`Основное тождество: сумма равна $1$.`,
+      solution: String.raw`Для любого действительного угла $\sin^{2}\alpha+\cos^{2}\alpha=1$. При $\alpha=\dfrac{\pi}{7}$ получаем $1$.`,
+    },
+    problems: [
+      {
+        id: "tr16-q1",
+        type: "choice",
+        prompt: String.raw`Выражение $\sin^{2}\alpha+\cos^{2}\alpha$ тождественно равно`,
+        options: ["$0$", "$1$", String.raw`$\sin 2\alpha$`, String.raw`$\tan\alpha$`],
+        answerIndex: 1,
+        explanation: String.raw`Основное тригонометрическое тождество.`,
+      },
+      {
+        id: "tr16-q2",
+        type: "open",
+        prompt: String.raw`Вычислите $1-2\sin^{2}\dfrac{\pi}{4}$.`,
+        accepted: ["0", "0.0"],
+        explanation: String.raw`$1-2\cdot\dfrac{1}{2}=0$, и это $\cos\dfrac{\pi}{2}$.`,
+      },
+      {
+        id: "tr16-q3",
+        type: "choice",
+        prompt: String.raw`Формула $\cos 2\alpha$ среди прочего равна`,
+        options: [
+          String.raw`$\cos^{2}\alpha+\sin^{2}\alpha$`,
+          String.raw`$\cos^{2}\alpha-\sin^{2}\alpha$`,
+          String.raw`$2\sin\alpha\cos\alpha$`,
+          String.raw`$\sin^{2}\alpha-\cos^{2}\alpha$`,
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Один из трёх стандартных видов: разность квадратов.`,
+      },
+      {
+        id: "tr16-q4",
+        type: "open",
+        prompt: String.raw`Вычислите $\tan\dfrac{\pi}{4}\cdot\cot\dfrac{\pi}{4}$.`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`Произведение тангенса и котангенса равно $1$.`,
+      },
+      {
+        id: "tr16-q5",
+        type: "choice",
+        prompt: String.raw`Выражение $1-2\sin^{2}\alpha$ тождественно равно`,
+        options: [
+          String.raw`$\sin 2\alpha$`,
+          String.raw`$\cos 2\alpha$`,
+          String.raw`$\tan\alpha$`,
+          "$1$",
+        ],
+        answerIndex: 1,
+        explanation: String.raw`Формула косинуса двойного угла через синус.`,
+      },
+      {
+        id: "tr16-q6",
+        type: "open",
+        prompt: String.raw`Найдите $\sin 2\alpha$, если $\sin\alpha=\cos\alpha=\dfrac{\sqrt{2}}{2}$.`,
+        accepted: ["1", "1.0"],
+        explanation: String.raw`$2\cdot\dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{2}}{2}=1$.`,
+      },
+    ],
+    sources: [
+      {
+        authors: "Алимов Ш.А., Колягин Ю.М., Ткачёва М.В. и др.",
+        title: "Алгебра и начала анализа. 10–11 классы",
+        note: "Преобразование тригонометрических выражений",
+      },
+      {
+        authors: "Мордкович А.Г.",
+        title: "Алгебра и начала математического анализа",
+        note: "Практика тождеств, двойной угол, основное тождество",
+      },
+    ],
+  }),
 ];

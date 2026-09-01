@@ -22,6 +22,7 @@ export function Layout() {
             Программы
           </NavLink>
           <NavLink to="/program/mathematics">Математика</NavLink>
+          <NavLink to="/glossary">Словарь</NavLink>
           <NavLink to="/diploma">Диплом</NavLink>
           <NavLink to="/profile">{state.name || "Профиль"}</NavLink>
           {gpa !== null && <span className="pill ok">GPA {formatGpa(gpa)}</span>}

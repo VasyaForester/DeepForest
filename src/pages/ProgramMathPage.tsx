@@ -34,7 +34,7 @@ export function ProgramMathPage() {
         style={{ color: "inherit", opacity: unlocked ? 1 : 0.55, pointerEvents: unlocked ? "auto" : "none" }}
       >
         <span className={`pill ${complete ? "ok" : unlocked ? "" : "lock"}`}>
-          {complete ? "Закрыт" : unlocked ? "Открыт" : kind === "school" ? "Закрыт до предыдущего курса" : "Ожидает пререквизиты"}
+          {complete ? "Закрыт" : unlocked ? "Открыт" : kind === "school" ? "Закрыт до предыдущего курса" : "Ждёт предварительные курсы"}
         </span>
         {kind !== "school" && (
           <span className={`pill ${kind === "core" ? "core" : "advanced"}`} style={{ marginLeft: 6 }}>

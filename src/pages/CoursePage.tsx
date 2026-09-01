@@ -1,8 +1,9 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { courseById, isCourseUnlocked, isLessonUnlocked, lessonsOf } from "../lib/progress";
+import { courseById, courseLeadsTo, courseStandsOn, isCourseUnlocked, isLessonUnlocked, lessonsOf } from "../lib/progress";
 import { useLessons } from "../data/lessons";
 import { useStore } from "../state";
 import { letterFromGrade } from "../lib/grading";
+import type { Course } from "../types";
 
 export function CoursePage() {
   const { courseId } = useParams();
@@ -18,8 +19,12 @@ export function CoursePage() {
       <section className="card locked-panel">
         <h1>{course.title}</h1>
         <p className="muted">
-          Курс ещё закрыт. Завершите школьную программу и указанные пререквизиты.
+          Курс ещё закрыт.{" "}
+          {course.phase === "school"
+            ? "Сначала сдайте предыдущие школьные курсы."
+            : "Сначала сдайте школьную программу и указанные предварительные курсы."}
         </p>
+        <CourseContext course={course} />
         <Link className="btn secondary" to="/program/mathematics">
           К программе
         </Link>
@@ -34,6 +39,7 @@ export function CoursePage() {
       </p>
       <h1>{course.title}</h1>
       <p className="muted">{course.description}</p>
+      <CourseContext course={course} />
       <div className="lesson-list">
         {list.map((l, i) => {
           const rec = state.records[l.id];
@@ -71,6 +77,40 @@ export function CoursePage() {
           );
         })}
       </div>
+    </div>
+  );
+}
+
+function CourseContext({ course }: { course: Course }) {
+  const stands = courseStandsOn(course);
+  const leads = courseLeadsTo(course);
+  const standsText = (() => {
+    if (course.phase === "school") {
+      if (stands.length === 0) return "Это начало школьной программы.";
+      return `Сначала сдают: ${stands.map((c) => c.title).join("; ")}.`;
+    }
+    if (stands.length === 0) return "Нужна вся школьная программа.";
+    return `Нужна вся школьная программа, а также: ${stands.map((c) => c.title).join("; ")}.`;
+  })();
+  const leadsText = (() => {
+    if (course.phase === "school" && leads.length === 0) {
+      return "После этого открывается вузовская программа.";
+    }
+    if (leads.length === 0) {
+      return "Этот курс дальше ни от чего напрямую не требуется: он нужен сам по себе.";
+    }
+    return `${course.phase === "school" ? "Дальше:" : "Открывает:"} ${leads.map((c) => c.title).join("; ")}.`;
+  })();
+  return (
+    <div className="course-context">
+      <p>
+        <strong>На чём стоит. </strong>
+        {standsText}
+      </p>
+      <p>
+        <strong>Куда ведёт. </strong>
+        {leadsText}
+      </p>
     </div>
   );
 }

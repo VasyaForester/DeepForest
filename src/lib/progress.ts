@@ -106,6 +106,27 @@ export function currentGpa(records: Record<string, LessonRecord>): number | null
   return Math.round((sum / vals.length) * 10) / 10;
 }
 
+/** Курсы, без которых этот ещё не открывается (для вуза — помимо всей школы). */
+export function courseStandsOn(course: Course): Course[] {
+  if (course.phase === "school") {
+    const prev = schoolCourses().filter((c) => c.order < course.order);
+    const last = prev[prev.length - 1];
+    return last ? [last] : [];
+  }
+  return course.requires
+    .map((id) => courseById(id))
+    .filter((c): c is Course => Boolean(c));
+}
+
+/** Курсы, которые этот открывает напрямую. */
+export function courseLeadsTo(course: Course): Course[] {
+  if (course.phase === "school") {
+    const next = schoolCourses().find((c) => c.order === course.order + 1);
+    return next ? [next] : [];
+  }
+  return courses.filter((c) => c.requires.includes(course.id));
+}
+
 export function nextLesson(
   current: Lesson,
   all: Lesson[],

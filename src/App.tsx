@@ -7,6 +7,7 @@ import { ProgramMathPage } from "./pages/ProgramMathPage";
 import { CoursePage } from "./pages/CoursePage";
 import { LessonPage } from "./pages/LessonPage";
 import { DiplomaPage } from "./pages/DiplomaPage";
+import { GlossaryPage } from "./pages/GlossaryPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { RequireName } from "./pages/RequireName";
 
@@ -23,6 +24,7 @@ export default function App() {
               <Route path="/course/:courseId" element={<CoursePage />} />
               <Route path="/lesson/:lessonId" element={<LessonPage />} />
               <Route path="/diploma" element={<DiplomaPage />} />
+              <Route path="/glossary" element={<GlossaryPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="*" element={<Navigate to="/programs" replace />} />
             </Route>

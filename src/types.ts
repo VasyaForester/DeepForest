@@ -8,6 +8,8 @@ export type Problem =
       options: string[];
       answerIndex: number;
       explanation: string;
+      /** Подсказки по возрастанию силы; полный разбор — в explanation. */
+      hints?: string[];
     }
   | {
       id: string;
@@ -15,6 +17,7 @@ export type Problem =
       prompt: string;
       accepted: string[];
       explanation: string;
+      hints?: string[];
     };
 
 export interface WorkedExample {
@@ -33,6 +36,13 @@ export interface Lesson {
   id: string;
   title: string;
   courseId: string;
+  /** Зачем эта тема нужна дальше по программе. */
+  purpose?: string;
+  /** Что в определение не входит, или типичное ложное обобщение. */
+  nonexample?: {
+    title: string;
+    text: string;
+  };
   theory: string;
   examples: WorkedExample[];
   sample: Problem & { solution: string };
